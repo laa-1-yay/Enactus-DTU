@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
     Button invitepoolfriends;
 
     AutoCompleteTextView poolname;
-    EditText organizerphonenumber;
+    AutoCompleteTextView organizerphonenumber;
     EditText totalamount;
     LinearLayout targetdate;
     EditText valuetargetdate;
@@ -92,13 +92,14 @@ public class MainActivity extends ActionBarActivity {
         usermobile = user.getString("usermobile",null);
 
 
+        String names[]= {"AMLAN", "DIVYAM", "SANCHIT", "AKANSHA", "ANURAG", "ISHITA V.", "JHILAKSHI", "SARTHAK", "SHASHANK", "SHIKHAR", "SIDDHIKA", "VIDUSHI", "AMBER", "AYUSH", "PIYUSH", "RICHA", "AMBESH", "HIMANSHU", "MANISH", "ASHUTOSH", "SAURABH", "GAURAV", "AMIT", "MODASSIR", "SUVEER", "APOORVA", "ISHITA", "LAAVANYE", "MAYUR", "PARIDHI", "SHREYA", "TANMAY", "ARUSHI J.", "MANASI", "NITANSHI", "SAGARI", "UTSAV", "SATYANSHU", "ADESH", "ADITYA", "SHIVAM", "ADRIJA", "GAUTAM G.", "KISHAN", "POORVA", "RISHAV", "SHIVALI G.", "TRIJUL", "ARPIT", "ISHA S.", "JIGYASA", "NAMYA", "PRAGATI", "SHUBHANGI", "AKSHIT", "GARIMA", "VIBHU"};
 
         invitepoolfriends = (Button) findViewById(R.id.invitefriends);
 
 //        invitepoolfriends.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
         poolname = (AutoCompleteTextView) findViewById(R.id.poolname);
-        organizerphonenumber = (EditText) findViewById(R.id.phoneorganizer);
+        organizerphonenumber = (AutoCompleteTextView) findViewById(R.id.phoneorganizer);
         totalamount = (EditText) findViewById(R.id.totalamount);
         valuetargetdate = (EditText) findViewById(R.id.valuedate);
         description = (EditText) findViewById(R.id.description);
@@ -122,6 +123,12 @@ public class MainActivity extends ActionBarActivity {
 
         poolname.setThreshold(1);
        poolname.setAdapter(adp);
+
+        ArrayAdapter<String> adp2=new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,names);
+
+        organizerphonenumber.setThreshold(1);
+        organizerphonenumber.setAdapter(adp2);
 
         poolname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
