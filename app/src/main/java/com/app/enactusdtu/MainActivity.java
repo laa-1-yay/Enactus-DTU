@@ -50,9 +50,9 @@ public class MainActivity extends ActionBarActivity {
 
     Button invitepoolfriends;
 
-    AutoCompleteTextView poolname;
-    AutoCompleteTextView organizerphonenumber;
-    EditText totalamount;
+    AutoCompleteTextView projectname;
+    AutoCompleteTextView membername;
+    EditText duration;
     LinearLayout targetdate;
     EditText valuetargetdate;
     EditText description;
@@ -70,9 +70,9 @@ public class MainActivity extends ActionBarActivity {
     int totalamounttext=0;
     String poolnametext =null;
 
-    String returnorganizerphonetext=  null ;
-    String returntotalamounttext ="0";
-    String returnpoolnametext = null;
+    String returnname =  null ;
+    String returnduration = null;
+    String returnprojectname = null;
     String returndate = null;
     String returndescription = null;
 
@@ -84,12 +84,7 @@ public class MainActivity extends ActionBarActivity {
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
 
-        SharedPreferences user = getSharedPreferences("USER", 0);
 
-        username = user.getString("username",null);
-        useremailid = user.getString("useremailid",null);
-        userdob = user.getString("userdob",null);
-        usermobile = user.getString("usermobile",null);
 
 
         String names[]= {"AMLAN", "DIVYAM", "SANCHIT", "AKANSHA", "ANURAG", "ISHITA V.", "JHILAKSHI", "SARTHAK", "SHASHANK", "SHIKHAR", "SIDDHIKA", "VIDUSHI", "AMBER", "AYUSH", "PIYUSH", "RICHA", "AMBESH", "HIMANSHU", "MANISH", "ASHUTOSH", "SAURABH", "GAURAV", "AMIT", "MODASSIR", "SUVEER", "APOORVA", "ISHITA", "LAAVANYE", "MAYUR", "PARIDHI", "SHREYA", "TANMAY", "ARUSHI J.", "MANASI", "NITANSHI", "SAGARI", "UTSAV", "SATYANSHU", "ADESH", "ADITYA", "SHIVAM", "ADRIJA", "GAUTAM G.", "KISHAN", "POORVA", "RISHAV", "SHIVALI G.", "TRIJUL", "ARPIT", "ISHA S.", "JIGYASA", "NAMYA", "PRAGATI", "SHUBHANGI", "AKSHIT", "GARIMA", "VIBHU"};
@@ -98,22 +93,22 @@ public class MainActivity extends ActionBarActivity {
 
 //        invitepoolfriends.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-        poolname = (AutoCompleteTextView) findViewById(R.id.poolname);
-        organizerphonenumber = (AutoCompleteTextView) findViewById(R.id.phoneorganizer);
-        totalamount = (EditText) findViewById(R.id.totalamount);
+        projectname = (AutoCompleteTextView) findViewById(R.id.poolname);
+        membername = (AutoCompleteTextView) findViewById(R.id.phoneorganizer);
+        duration = (EditText) findViewById(R.id.totalamount);
         valuetargetdate = (EditText) findViewById(R.id.valuedate);
         description = (EditText) findViewById(R.id.description);
 
-        organizerphonenumber.setText(usermobile);
+        membername.setText(usermobile);
 
         targetdate = (LinearLayout) findViewById(R.id.targetdate);
 
-        totalamount.setClickable(false);
+        duration.setClickable(false);
 
         valuetargetdate.setClickable(false);
         valuetargetdate.setKeyListener(null);
 
-        final Drawable originalDrawable = poolname.getBackground();
+        final Drawable originalDrawable = projectname.getBackground();
 
         String str[]={"Project Prakriti", "Project Chhaap", "Project Unmoolan"};
 
@@ -121,38 +116,38 @@ public class MainActivity extends ActionBarActivity {
         ArrayAdapter<String> adp=new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,str);
 
-        poolname.setThreshold(1);
-       poolname.setAdapter(adp);
+        projectname.setThreshold(1);
+       projectname.setAdapter(adp);
 
         ArrayAdapter<String> adp2=new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,names);
 
-        organizerphonenumber.setThreshold(1);
-        organizerphonenumber.setAdapter(adp2);
+        membername.setThreshold(1);
+        membername.setAdapter(adp2);
 
-        poolname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        projectname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View arg0, boolean arg1) {
-                if(poolname.isFocused()) {
-                    poolname.setBackground(originalDrawable);
+                if (projectname.isFocused()) {
+                    projectname.setBackground(originalDrawable);
                 }
             }
         });
 
-//        organizerphonenumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//        membername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
 //            public void onFocusChange(View arg0, boolean arg1) {
-//                if(organizerphonenumber.isFocused()) {
-//                    organizerphonenumber.setBackground(originalDrawable);
+//                if(membername.isFocused()) {
+//                    membername.setBackground(originalDrawable);
 //                }
 //            }
 //        });
 
-//        totalamount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//        duration.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
 //            public void onFocusChange(View arg0, boolean arg1) {
-//                if(totalamount.isFocused()) {
-//                    totalamount.setBackground(originalDrawable);
+//                if(duration.isFocused()) {
+//                    duration.setBackground(originalDrawable);
 //                }
 //            }
 //        });
@@ -179,59 +174,63 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
 
-                returnpoolnametext = poolname.getText().toString();
+                returnprojectname = projectname.getText().toString();
                 returndate = valuetargetdate.getText().toString();
-                returnorganizerphonetext = organizerphonenumber.getText().toString();
+                returnname = membername.getText().toString();
                 returndescription = description.getText().toString();
+                returnduration = duration.getText().toString();
 
-                int returntotalamounttextvalue=0;
-                returntotalamounttext = totalamount.getText().toString();
-                if(returntotalamounttext!=null) {
-                    try{
-                        returntotalamounttextvalue = Integer.valueOf(returntotalamounttext);
-                    }catch (Exception e){
-                    }
-                }
 
-                if (returnorganizerphonetext.length() == 0 || (returnorganizerphonetext.length() > 0 && returnorganizerphonetext.length() < 10) || returndate.length() == 0 ||
-                        (returnorganizerphonetext.charAt(0) == '6') || (returnorganizerphonetext.charAt(0) == '5') || (returnorganizerphonetext.charAt(0) == '4') || (returnorganizerphonetext.charAt(0) == '3') ||
-                        (returnorganizerphonetext.charAt(0) == '2') || (returnorganizerphonetext.charAt(0) == '1') ||
-                        returntotalamounttext.length() <3 || (returntotalamounttextvalue < 100) || returnpoolnametext.length() == 0) {
+                if (returnname.length() == 0 ||  returndate.length() == 0 ||   returndescription.length() == 0 ||
+                        returnduration.length() == 0 ||
+                        returnprojectname.length() == 0) {
 //                    Toast.makeText(getApplicationContext(), "Please fill in all the details before you proceed !", Toast.LENGTH_SHORT).show();
 
-                    if (returnorganizerphonetext.length() == 0) {
-                        organizerphonenumber.setBackgroundResource(R.drawable.redtextfield);
-                        Toast.makeText(getApplicationContext(), "Empty phone number", Toast.LENGTH_SHORT).show();
+                    if (returnname.length() == 0) {
+                        membername.setBackgroundResource(R.drawable.redtextfield);
+                        Toast.makeText(getApplicationContext(), "Enter your name", Toast.LENGTH_SHORT).show();
                     }
-//                    if ( returnorganizerphonetext.length() == 0 || (returnorganizerphonetext.length() > 0 && returnorganizerphonetext.length() < 10)) {
-//                        organizerphonenumber.setBackgroundResource(R.drawable.redtextfield);
+//                    if ( returnname.length() == 0 || (returnname.length() > 0 && returnname.length() < 10)) {
+//                        membername.setBackgroundResource(R.drawable.redtextfield);
 //                        Toast.makeText(getApplicationContext(), "Invalid number : Should be of 10 digits", Toast.LENGTH_SHORT).show();
 //                    }
-//                    if ( (returnorganizerphonetext.charAt(0) == '6') || (returnorganizerphonetext.charAt(0) == '5') || (returnorganizerphonetext.charAt(0) == '4') || (returnorganizerphonetext.charAt(0) == '3') || (returnorganizerphonetext.charAt(0) == '2') || (returnorganizerphonetext.charAt(0) == '1')) {
-//                        organizerphonenumber.setBackgroundResource(R.drawable.redtextfield);
+//                    if ( (returnname.charAt(0) == '6') || (returnname.charAt(0) == '5') || (returnname.charAt(0) == '4') || (returnname.charAt(0) == '3') || (returnname.charAt(0) == '2') || (returnname.charAt(0) == '1')) {
+//                        membername.setBackgroundResource(R.drawable.redtextfield);
 //                        Toast.makeText(getApplicationContext(), "Invalid number : Number should start with 9 or 8 or 7 ", Toast.LENGTH_SHORT).show();
 //                    }
 
-//                    if (returntotalamounttext.length()==0) {
-//                        totalamount.setBackgroundResource(R.drawable.redtextfield);
+//                    if (returnduration.length()==0) {
+//                        duration.setBackgroundResource(R.drawable.redtextfield);
 //                        Toast.makeText(getApplicationContext(), "Minimum amount should be Rs 100", Toast.LENGTH_SHORT).show();
 //                    }
 //                    if (returntotalamounttextvalue < 100) {
-//                        totalamount.setBackgroundResource(R.drawable.redtextfield);
+//                        duration.setBackgroundResource(R.drawable.redtextfield);
 //                        Toast.makeText(getApplicationContext(), "Minimum amount should be Rs 100", Toast.LENGTH_SHORT).show();
 //                    }
-                    if (returnpoolnametext.length() == 0) {
-                        poolname.setBackgroundResource(R.drawable.redtextfield);
-                        Toast.makeText(getApplicationContext(), "Enter a pool name", Toast.LENGTH_SHORT).show();
+                    if (returnprojectname.length() == 0) {
+                        projectname.setBackgroundResource(R.drawable.redtextfield);
+                        Toast.makeText(getApplicationContext(), "Enter a project name", Toast.LENGTH_SHORT).show();
                     }
                     if (returndate.length() == 0) {
                         valuetargetdate.setBackgroundResource(R.drawable.redtextfield);
                         Toast.makeText(getApplicationContext(), "Enter a valid date", Toast.LENGTH_SHORT).show();
                     }
 
+                    if (returndescription.length() == 0) {
+                        description.setBackgroundResource(R.drawable.redtextfield);
+                        Toast.makeText(getApplicationContext(), "Enter a description", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (returnduration.length() == 0) {
+                        duration.setBackgroundResource(R.drawable.redtextfield);
+                        Toast.makeText(getApplicationContext(), "Enter the duration", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 } else {
 
                     Toast.makeText(getApplicationContext(), "Data added !", Toast.LENGTH_LONG).show();
+                    
 
                 }
             }
@@ -302,15 +301,16 @@ public class MainActivity extends ActionBarActivity {
 
     /** Updates the time in the TextView */
     private void updateDisplay2() {
-        totalamount.setText(
+        duration.setText(
                 new StringBuilder()
                         .append(pad(pHour)).append(" hours ")
-                        .append(pad(pMinute)).append(" min"));
+                        .append(pad(pMinute)).append(" min")
+        );
     }
 
     /** Displays a notification when the time is updated */
     private void displayToast() {
-        Toast.makeText(getApplicationContext(), new StringBuilder().append("Duration is ").append(totalamount.getText()),   Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), new StringBuilder().append("Duration is ").append(duration.getText()),   Toast.LENGTH_SHORT).show();
 
     }
 
