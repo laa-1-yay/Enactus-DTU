@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#000000"
+    android:background="@drawable/back"
     >
 
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:imeOptions="actionNext"
         android:inputType="textCapSentences"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         />
 
 
@@ -31,34 +31,49 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:inputType="phone"
-        android:ems="10"
+
         android:hint="Type your name"
         android:id="@+id/phoneorganizer"
         android:layout_marginBottom="10dp"
-        android:digits="0123456789"
-        android:maxLength="10"
         android:imeOptions="actionNext"
         android:singleLine="true"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
 
 
         android:layout_weight="1" />
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:id="@+id/totalamount"
-        android:hint="Duration of the activity"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:id="@+id/picktime"
+        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:imeOptions="actionNext"
 
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:textColor="#ffffff"
+        >
 
-        />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/totalamount"
+            android:hint="Duration of the activity"
+            android:clickable="false"
+            android:textColor="#000000"
+            android:layout_weight="5"
+
+            />
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_lock_idle_alarm"/>
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +82,6 @@
         android:id="@+id/targetdate"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/customtextfield"
 
         >
 
@@ -78,7 +92,7 @@
             android:hint="Select Date (YYYY-MM-DD)"
             android:id="@+id/valuedate"
             android:clickable="false"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
 
             />
 
@@ -101,7 +115,7 @@
         android:maxLength="200"
         android:layout_marginBottom="10dp"
         android:imeOptions="actionNext"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:inputType="textCapSentences"
 
         />
@@ -111,7 +125,7 @@
         android:layout_height="0dp"
         android:text="Add Work"
         android:id="@+id/invitefriends"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:layout_alignParentBottom="true"
         android:background="#ffa000"
         android:textColor="#FFFFFF"
