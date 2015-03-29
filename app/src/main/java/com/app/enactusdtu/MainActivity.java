@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar bar = getActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        bar.setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
 
         SharedPreferences user = getSharedPreferences("USER", 0);
 
@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
 
         invitepoolfriends = (Button) findViewById(R.id.invitefriends);
 
-        invitepoolfriends.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+//        invitepoolfriends.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
         poolname = (AutoCompleteTextView) findViewById(R.id.poolname);
         organizerphonenumber = (EditText) findViewById(R.id.phoneorganizer);

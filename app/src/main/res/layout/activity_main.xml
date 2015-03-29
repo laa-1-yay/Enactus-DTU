@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@drawable/back"
+    android:background="#000000"
     >
 
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:imeOptions="actionNext"
         android:inputType="textCapSentences"
-        android:textColor="#000000"
+        android:textColor="#ffa000"
         />
 
 
@@ -37,7 +37,7 @@
         android:layout_marginBottom="10dp"
         android:imeOptions="actionNext"
         android:singleLine="true"
-        android:textColor="#000000"
+        android:textColor="#ffa000"
 
 
         android:layout_weight="1" />
@@ -58,7 +58,7 @@
             android:id="@+id/totalamount"
             android:hint="Duration of the activity(HH:MM)"
             android:clickable="false"
-            android:textColor="#000000"
+            android:textColor="#ffa000"
             android:focusable="false"
             android:layout_weight="5"
 
@@ -94,7 +94,7 @@
             android:id="@+id/valuedate"
             android:clickable="false"
             android:focusable="false"
-            android:textColor="#000000"
+            android:textColor="#ffa000"
 
             />
 
@@ -117,7 +117,7 @@
         android:maxLength="200"
         android:layout_marginBottom="10dp"
         android:imeOptions="actionNext"
-        android:textColor="#000000"
+        android:textColor="#ffa000"
         android:inputType="textCapSentences"
 
         />
