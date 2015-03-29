@@ -13,6 +13,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -48,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
 
     Button invitepoolfriends;
 
-    EditText poolname;
+    AutoCompleteTextView poolname;
     EditText organizerphonenumber;
     EditText totalamount;
     LinearLayout targetdate;
@@ -95,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
 
         invitepoolfriends.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-        poolname = (EditText) findViewById(R.id.poolname);
+        poolname = (AutoCompleteTextView) findViewById(R.id.poolname);
         organizerphonenumber = (EditText) findViewById(R.id.phoneorganizer);
         totalamount = (EditText) findViewById(R.id.totalamount);
         valuetargetdate = (EditText) findViewById(R.id.valuedate);
@@ -111,6 +113,15 @@ public class MainActivity extends ActionBarActivity {
         valuetargetdate.setKeyListener(null);
 
         final Drawable originalDrawable = poolname.getBackground();
+
+        String str[]={"Project Prakriti", "Project Chhaap", "Project Unmoolan"};
+
+
+        ArrayAdapter<String> adp=new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,str);
+
+        poolname.setThreshold(1);
+       poolname.setAdapter(adp);
 
         poolname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -232,13 +243,13 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        /** Get the current time */
-        final Calendar cal2 = Calendar.getInstance();
-        pHour = cal2.get(Calendar.HOUR_OF_DAY);
-        pMinute = cal2.get(Calendar.MINUTE);
-
-        /** Display the current time in the TextView */
-        updateDisplay2();
+//        /** Get the current time */
+//        final Calendar cal2 = Calendar.getInstance();
+//        pHour = cal2.get(Calendar.HOUR_OF_DAY);
+//        pMinute = cal2.get(Calendar.MINUTE);
+//
+//        /** Display the current time in the TextView */
+//        updateDisplay2();
     }
 
     /** Create a new dialog for time picker */
@@ -261,8 +272,12 @@ public class MainActivity extends ActionBarActivity {
                 return d;
 
             case TIME_DIALOG_ID:
-                return new TimePickerDialog(this,
-                        mTimeSetListener, pHour, pMinute, false);
+                TimePickerDialog timePickerDialog =
+                 new TimePickerDialog(this,
+                        mTimeSetListener, pHour, pMinute, true);
+                timePickerDialog.setTitle("Duration of the activity in HH:MM");
+
+                return timePickerDialog;
         }
         return null;
     }
@@ -282,13 +297,13 @@ public class MainActivity extends ActionBarActivity {
     private void updateDisplay2() {
         totalamount.setText(
                 new StringBuilder()
-                        .append(pad(pHour)).append(":")
-                        .append(pad(pMinute)));
+                        .append(pad(pHour)).append(" hours ")
+                        .append(pad(pMinute)).append(" min"));
     }
 
     /** Displays a notification when the time is updated */
     private void displayToast() {
-        Toast.makeText(this, new StringBuilder().append("Time choosen is ").append(displayTime.getText()),   Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), new StringBuilder().append("Duration is ").append(totalamount.getText()),   Toast.LENGTH_SHORT).show();
 
     }
 

@@ -56,9 +56,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/totalamount"
-            android:hint="Duration of the activity"
+            android:hint="Duration of the activity(HH:MM)"
             android:clickable="false"
             android:textColor="#000000"
+            android:focusable="false"
             android:layout_weight="5"
 
             />
@@ -67,7 +68,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:src="@android:drawable/ic_lock_idle_alarm"/>
 
 
@@ -92,6 +93,7 @@
             android:hint="Select Date (YYYY-MM-DD)"
             android:id="@+id/valuedate"
             android:clickable="false"
+            android:focusable="false"
             android:textColor="#000000"
 
             />
